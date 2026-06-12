@@ -1,0 +1,25 @@
+# Build files
+*.elf
+*.hex
+*.o
+*.obj
+*.map
+*.lss
+*.eep
+*.sym
+
+# Atmel Studio / Microchip Studio
+Debug/
+Release/
+*.atsln
+*.cproj
+*.componentinfo.xml
+
+# Proteus backup/cache
+*.workspace
+*.backup
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db
