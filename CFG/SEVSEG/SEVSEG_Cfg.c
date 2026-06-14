@@ -34,15 +34,15 @@ const SEVSEG_Config_t SEVSEG_Config =
 
     .type           = SEVSEG_COMMON_CATHODE,
 
-    .digit_polarity = SEVSEG_DIGIT_ACTIVE_LOW,
+    .digit_polarity = SEVSEG_DIGIT_ACTIVE_HIGH,
 
-    .mode           = SEVSEG_FOUR_DIGITS,
+    .mode           = SEVSEG_TWO_DIGITS,
 
     .digit_pins =
     {
-        DIO_PINC7,  /* Digit 0: seconds units */
-        DIO_PINC6,  /* Digit 1: seconds tens  */
-        DIO_PINB3,  /* Digit 2: minutes units */
-        DIO_PINB4   /* Digit 3: minutes tens  */
+        DIO_PINC6,  /* Digit 0: units - DIG1 / C1 / right digit */
+        DIO_PINC7,  /* Digit 1: tens  - DIG2 / C2 / left digit  */
+        DIO_PINB3,  /* Not used */
+        DIO_PINB4   /* Not used */
     }
 };
