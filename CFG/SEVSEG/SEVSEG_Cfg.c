@@ -29,20 +29,20 @@
 
 const SEVSEG_Config_t SEVSEG_Config =
 {
-    .segment_port   = PA,
-    .segment_shift  = 1U,
+	.segment_port   = PA,
+	.segment_shift  = 1U,
 
-    .type           = SEVSEG_COMMON_CATHODE,
+	.type           = SEVSEG_COMMON_CATHODE,
 
-    .digit_polarity = SEVSEG_DIGIT_ACTIVE_HIGH,
+	.digit_polarity = SEVSEG_DIGIT_ACTIVE_HIGH,
 
-    .mode           = SEVSEG_TWO_DIGITS,
+	.mode           = SEVSEG_TWO_DIGITS,
 
-    .digit_pins =
-    {
-        DIO_PINC6,  /* Digit 0: units - DIG1 / C1 / right digit */
-        DIO_PINC7,  /* Digit 1: tens  - DIG2 / C2 / left digit  */
-        DIO_PINB3,  /* Not used */
-        DIO_PINB4   /* Not used */
-    }
+	.digit_pins =
+	{
+		DIO_PINC6,  /* Digit 0: units */
+		DIO_PINC7,  /* Digit 1: tens  */
+		DIO_PINB3,  /* Not used in 2 digits */
+		DIO_PINB4   /* Not used in 2 digits */
+	}
 };
