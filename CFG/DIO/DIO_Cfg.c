@@ -3,37 +3,59 @@
 #include "DIO_Int.h"
 #include "DIO_Private.h"
 #include "DIO_Cfg.h"
-const  DIO_Status_t PinsStatusArr[TOTAL_PINS]={
-	INFREE,      /* Port A Pin 0 ADC0*/
-	OUTPUT,      /* Port A Pin 1 ADC1*/
-	OUTPUT,      /* Port A Pin 2 */
-	OUTPUT,      /* Port A Pin 3 */
-	OUTPUT,      /* Port A Pin 4 */
-	OUTPUT,      /* Port A Pin 5 */
-	OUTPUT,      /* Port A Pin 6 */
-	INFREE,      /* Port A Pin 7 ADC7*/
-	OUTPUT,      /* Port B Pin 0   / */
-	OUTPUT,      /* Port B Pin 1   /*/
-	OUTPUT,		 /* Port B Pin 2 / INT2*/
-	OUTPUT,		 /* Port B Pin 3   /OC0*/
-	INPULL,		 /* Port B Pin 4 /ss*/
-	INPULL,		 /* Port B Pin 5 //mosi*/
-	INPULL,		 /* Port B Pin 6 /miso*/
-	INPULL,		 /* Port B Pin 7 clk*/
-	OUTPUT,		 /* Port C Pin 0 */
-	OUTPUT,		 /* Port C Pin 1 */
-	OUTPUT,		 /* Port C Pin 2 */
-	OUTPUT,		 /* Port C Pin 3 */
-	OUTPUT,		 /* Port C Pin 4 */
-	OUTPUT,		 /* Port C Pin 5 */
-	OUTPUT,		 /* Port C Pin 6 */
-	OUTPUT,		 /* Port C Pin 7 */
-	INFREE,		 /* Port D Pin 0 RX*/
-	OUTPUT,		 /* Port D Pin 1 TX*/
-    OUTPUT,      /* Port D Pin 2 /INT0*/
-	OUTPUT,      /* Port D Pin 3 / INT1 */
-	OUTPUT,		 /* Port D Pin 4  OC1B*/
-	OUTPUT,		 /* Port D Pin 5 OC1A*/
-	OUTPUT,		 /* Port D Pin 6 /   ICP*/
-	OUTPUT		 /* Port D Pin 7 */
-	};
+
+/**
+ * @file DIO_Cfg.c
+ * @brief DIO pin configuration for ATmega32 Bluetooth Countdown project.
+ *
+ * Pin usage:
+ * - PA1:PA7  -> Seven Segment segments A:G
+ * - PB0      -> Seven Segment DOT
+ * - PC5      -> Buzzer
+ * - PC6      -> Seven Segment Digit 0 enable
+ * - PC7      -> Seven Segment Digit 1 enable
+ * - PD0      -> UART RX
+ * - PD1      -> UART TX
+ */
+const DIO_Status_t PinsStatusArr[TOTAL_PINS] =
+{
+    /* PORTA */
+    INFREE,     /* PA0: Unused */
+    OUTPUT,     /* PA1: Seven Segment A */
+    OUTPUT,     /* PA2: Seven Segment B */
+    OUTPUT,     /* PA3: Seven Segment C */
+    OUTPUT,     /* PA4: Seven Segment D */
+    OUTPUT,     /* PA5: Seven Segment E */
+    OUTPUT,     /* PA6: Seven Segment F */
+    OUTPUT,     /* PA7: Seven Segment G */
+
+    /* PORTB */
+    OUTPUT,     /* PB0: Seven Segment DOT */
+    INFREE,     /* PB1: Unused */
+    INFREE,     /* PB2: Unused / INT2 */
+    INFREE,     /* PB3: Unused / OC0 */
+    INPULL,     /* PB4: Unused / SS */
+    INPULL,     /* PB5: Unused / MOSI */
+    INPULL,     /* PB6: Unused / MISO */
+    INPULL,     /* PB7: Unused / SCK */
+
+    /* PORTC */
+    INFREE,     /* PC0: Unused */
+    INFREE,     /* PC1: Unused */
+    INFREE,     /* PC2: Unused */
+    INFREE,     /* PC3: Unused */
+    INFREE,     /* PC4: Unused */
+    OUTPUT,     /* PC5: Buzzer */
+    OUTPUT,     /* PC6: Seven Segment Digit 0 enable */
+    OUTPUT,     /* PC7: Seven Segment Digit 1 enable */
+
+    /* PORTD */
+    INFREE,     /* PD0: UART RX */
+    OUTPUT,     /* PD1: UART TX */
+    INFREE,     /* PD2: Unused / INT0 */
+    INFREE,     /* PD3: Unused / INT1 */
+    INFREE,     /* PD4: Unused / OC1B */
+    INFREE,     /* PD5: Unused / OC1A */
+    INFREE,     /* PD6: Unused / ICP */
+    INFREE      /* PD7: Unused */
+};
