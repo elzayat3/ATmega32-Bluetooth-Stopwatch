@@ -161,42 +161,51 @@ void SEVSEG_SetTime(u8 Copy_u8Minutes, u8 Copy_u8Seconds)
 
 void SEVSEG_Update(void)
 {
-	u8 Local_u8DigitsCount = SEVSEG_GetActiveDigitsCount();
-	u8 Local_u8DigitValue;
+    u8 Local_u8ActiveDigits = SEVSEG_GetActiveDigitsCount();
+    u8 Local_u8DigitValue;
 
-	SEVSEG_DisableAllDigits();
+    if (SEVSEG_State == SEVSEG_ENABLED)
+    {
+        /* 1. Turn OFF all digits first */
+        SEVSEG_DisableAllDigits();
 
-	if (SEVSEG_State == SEVSEG_ENABLED)
-	{
-		if (SEVSEG_u8CurrentDigit >= Local_u8DigitsCount)
-		{
-			SEVSEG_u8CurrentDigit = 0U;
-		}
+        /* 2. Turn OFF all segments */
+        SEVSEG_WriteBlank();
 
-		Local_u8DigitValue = SEVSEG_u8DisplayBuffer[SEVSEG_u8CurrentDigit];
+        /*
+         * 3. Software blanking time
+         * Try 50us first.
+         * If ghosting still exists, try 100us.
+         */
+        _delay_us(50);
 
-		if (Local_u8DigitValue < SEVSEG_DIGIT_COUNT_10)
-		{
-			SEVSEG_WritePattern(SEVSEG_u8DigitPatterns[Local_u8DigitValue]);
-		}
-		else
-		{
-			SEVSEG_WriteBlank();
-		}
+        /* 4. Prepare next digit pattern */
+        Local_u8DigitValue = SEVSEG_u8DisplayBuffer[SEVSEG_u8CurrentDigit];
 
-		SEVSEG_EnableDigit(SEVSEG_u8CurrentDigit);
+        if (Local_u8DigitValue <= 9U)
+        {
+            SEVSEG_WritePattern(SEVSEG_u8DigitPatterns[Local_u8DigitValue]);
+        }
+        else
+        {
+            SEVSEG_WriteBlank();
+        }
 
-		SEVSEG_u8CurrentDigit++;
+        /* 5. Enable only the required digit */
+        SEVSEG_EnableDigit(SEVSEG_u8CurrentDigit);
 
-		if (SEVSEG_u8CurrentDigit >= Local_u8DigitsCount)
-		{
-			SEVSEG_u8CurrentDigit = 0U;
-		}
-	}
-	else
-	{
-		SEVSEG_WriteBlank();
-	}
+        SEVSEG_u8CurrentDigit++;
+
+        if (SEVSEG_u8CurrentDigit >= Local_u8ActiveDigits)
+        {
+            SEVSEG_u8CurrentDigit = 0U;
+        }
+    }
+    else
+    {
+        SEVSEG_DisableAllDigits();
+        SEVSEG_WriteBlank();
+    }
 }
 
 void SEVSEG_Clear(void)
